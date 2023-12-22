@@ -1,4 +1,4 @@
-package com.natamus.quickrightclick.forge.mixin;
+package com.natamus.quickrightclick.mixin;
 
 import com.natamus.collective.functions.ItemFunctions;
 import com.natamus.quickrightclick.data.Constants;
