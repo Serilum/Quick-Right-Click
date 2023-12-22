@@ -1,4 +1,4 @@
-package com.natamus.quickrightclick.forge.mixin;
+package com.natamus.quickrightclick.mixin;
 
 import com.natamus.quickrightclick.data.Variables;
 import com.natamus.quickrightclick.util.Util;
