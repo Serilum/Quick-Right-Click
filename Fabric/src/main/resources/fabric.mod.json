@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "quickrightclick",
-  "version": "1.3",
+  "version": "1.4",
 
   "name": "Quick Right-Click",
   "description": "Adds the functionality to right-click items in the air to access them quickly without placing them. Works for beds, cartography tables, crafting tables, ender chests, grindstones, shulker boxes, smithing tables and stonecutters.",
@@ -18,7 +18,7 @@
   "environment": "*",
   "entrypoints": { "main": [ "com.natamus.quickrightclick.ModFabric" ], "modmenu": [ "com.natamus.quickrightclick.fabric.config.IntegrateModMenu" ] },
   "mixins": [
-    "quickrightclick_fabric.mixins.json"
+    "quickrightclick.mixins.json"
   ],
 
   "depends": {
@@ -26,7 +26,7 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=7.21"
+    "collective": ">=7.26"
   },
 
   "custom": {

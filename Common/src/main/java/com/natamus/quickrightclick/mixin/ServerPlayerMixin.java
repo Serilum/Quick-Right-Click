@@ -1,4 +1,4 @@
-package com.natamus.quickrightclick.fabric.mixin;
+package com.natamus.quickrightclick.mixin;
 
 import com.natamus.quickrightclick.data.Variables;
 import net.minecraft.core.BlockPos;
