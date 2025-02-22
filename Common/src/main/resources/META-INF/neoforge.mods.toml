@@ -6,7 +6,7 @@ logoFile="icon.png"
 
 [[mods]]
 modId="quickrightclick"
-version="1.6"
+version="1.7"
 displayName="Quick Right-Click"
 displayURL="https://serilum.com/mod/quick-right-click"
 authors="Rick South"
@@ -22,7 +22,7 @@ If you would like to contribute too, check out https://serilum.com/donate. Appre
 [[dependencies.quickrightclick]]
     modId="collective"
     type="required"
-    versionRange="[7.91,)"
+    versionRange="[7.92,)"
     ordering="NONE"
     side="BOTH"
 

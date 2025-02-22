@@ -3,7 +3,9 @@ package com.natamus.quickrightclick.mixin;
 import com.natamus.collective.functions.ItemFunctions;
 import com.natamus.quickrightclick.data.Constants;
 import com.natamus.quickrightclick.data.Variables;
+import com.natamus.quickrightclick.features.ShulkerBoxFeature;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -17,12 +19,15 @@ import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = ShulkerBoxBlockEntity.class, priority = 1001)
 public class ShulkerBoxBlockEntityMixin {
+    @Shadow private NonNullList<ItemStack> itemStacks;
+
     @Inject(method = "stopOpen(Lnet/minecraft/world/entity/player/Player;)V", at = @At(value = "HEAD"))
     public void stopOpen(Player player, CallbackInfo ci) {
         String playerName = player.getName().getString();
@@ -43,12 +48,11 @@ public class ShulkerBoxBlockEntityMixin {
             BlockState blockState = shulkerBoxBlockEntity.getBlockState();
             Block block = blockState.getBlock();
 
-            if (!(block instanceof ShulkerBoxBlock)) {
+            if (!(block instanceof ShulkerBoxBlock shulkerBoxBlock)) {
                 return;
             }
 
-            ShulkerBoxBlock shulkerBoxBlock = (ShulkerBoxBlock)block;
-            ItemStack shulkerStack = new ItemStack(shulkerBoxBlock);
+            ItemStack shulkerStack = ShulkerBoxFeature.getCloneItemStack(level, shulkerPos, blockState, shulkerBoxBlock);
 
             Style nameStyle = shulkerEntityCustomName.getStyle();
             shulkerStack.set(DataComponents.CUSTOM_NAME, Component.literal(shulkerEntityCustomNameString.replace(Constants.INVISIBLE_CHAR, "")).withStyle(nameStyle));
