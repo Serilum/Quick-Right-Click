@@ -35,7 +35,7 @@ public class ShulkerBoxFeature {
         BlockPos shulkerPos = playerPos.above(2).relative(playerDirection, 0).immutable();
         if (!level.getBlockState(shulkerPos).getBlock().equals(Blocks.AIR)) {
             if (level.isClientSide) {
-                MessageFunctions.sendMessage(player, "Unable to open shulker box, location obstructed.", ChatFormatting.DARK_GRAY);
+                MessageFunctions.sendTranslatableMessage(player, "collective.quickrightclick.message.unableopenshulker", ChatFormatting.DARK_GRAY);
             }
             return false;
         }

@@ -33,7 +33,7 @@ public class BedBlockFeature {
 
             if (!level.getBlockState(bedPos).getBlock().equals(Blocks.AIR) || !level.getBlockState(bedPos.north()).getBlock().equals(Blocks.AIR)) {
                 if (level.isClientSide) {
-                    MessageFunctions.sendMessage(player, "Unable to sleep, location obstructed.", ChatFormatting.DARK_GRAY);
+                    MessageFunctions.sendTranslatableMessage(player, "collective.quickrightclick.message.unablesleeplocation", ChatFormatting.DARK_GRAY);
                 }
                 return false;
             }
