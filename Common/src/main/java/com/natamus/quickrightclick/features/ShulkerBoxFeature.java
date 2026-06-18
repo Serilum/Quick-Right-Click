@@ -22,7 +22,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.TagValueOutput;
@@ -81,7 +81,7 @@ public class ShulkerBoxFeature {
 
     public static ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState, Block shulkerBoxBlock) {
         ItemStack itemStack = new ItemStack(shulkerBoxBlock.asItem());
-        levelReader.getBlockEntity(blockPos, BlockEntityType.SHULKER_BOX).ifPresent((shulkerBoxBlockEntity) -> saveToItem(shulkerBoxBlockEntity, itemStack, levelReader.registryAccess()));
+        levelReader.getBlockEntity(blockPos, BlockEntityTypes.SHULKER_BOX).ifPresent((shulkerBoxBlockEntity) -> saveToItem(shulkerBoxBlockEntity, itemStack, levelReader.registryAccess()));
         return itemStack;
     }
 
