@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -54,7 +55,7 @@ public class QuickEvent {
 		}
 
 		if (result) {
-			player.swing(hand, true);
+			player.swing(hand, SwingAnimation.DEFAULT, true);
 			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.PASS;

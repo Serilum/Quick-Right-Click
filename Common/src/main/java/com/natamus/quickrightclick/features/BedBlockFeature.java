@@ -25,7 +25,7 @@ public class BedBlockFeature {
         }
 
         BedRule bedrule = (BedRule)level.environmentAttributes().getValue(EnvironmentAttributes.BED_RULE, playerPos);
-        if (bedrule.explodes()) {
+        if (bedrule.destroyOnUse()) {
             return false;
         }
 
@@ -49,7 +49,7 @@ public class BedBlockFeature {
             Variables.bedIsSleeping.add(playerName);
 
             AtomicBoolean canSleep = new AtomicBoolean(true);
-            player.startSleepInBed(bedPos.north()).ifLeft((bedSleepingProblem) -> {
+            player.startSleepInBed((BedBlock)block, level.getBlockState(bedPos.north()), bedrule, bedPos.north()).ifLeft((bedSleepingProblem) -> {
                 if (bedSleepingProblem.message() != null) {
                     player.sendOverlayMessage(bedSleepingProblem.message());
                     canSleep.set(false);

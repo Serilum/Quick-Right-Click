@@ -57,7 +57,7 @@ public class ShulkerBoxFeature {
         ItemContainerContents itemContainerContents = handStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
 
         int i = 0;
-        Iterator<ItemStack> itemContainerIterator = itemContainerContents.allItemsCopyStream().iterator();
+        Iterator<ItemStack> itemContainerIterator = itemContainerContents.itemCopies().iterator();
         while (itemContainerIterator.hasNext()) {
             ItemStack nextStack = itemContainerIterator.next();
             shulkerBoxBlockEntity.setItem(i, nextStack);
