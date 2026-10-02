@@ -1,29 +1,29 @@
 modLoader="javafml"
 loaderVersion="*"
-license="All rights reserved"
+license="All Rights Reserved"
 issueTrackerURL="https://github.com/Serilum/.issue-tracker/labels/Mod:%20Quick%20Right-Click"
 logoFile="icon.png"
 
 [[mods]]
 modId="quickrightclick"
-version="1.9"
+version="2.0"
 displayName="Quick Right-Click"
 displayURL="https://serilum.com/mod/quick-right-click"
-authors="Rick South"
+authors="Serilum"
 description='''Adds the functionality to right-click items in the air to access them quickly without placing them. Works for beds, cartography tables, crafting tables, ender chests, grindstones, shulker boxes, smithing tables and stonecutters.
 '''
 credits='''Thank you very much to my Membership sponsors for supporting the development of this mod:  
 
-Andrean Olgo, aternosorg, Cherriesaurus, Linda Jansen, Michelle Smith, MWS, Tyler Behl   
+Andrean Olgo, AnyankaT, aternosorg, Cherriesaurus, Linda Jansen, MWS, Tyler Behl   
 
-If you would like to contribute too, check out https://serilum.com/donate. Appreciate it! <3   
+If you would like to contribute too, check out https://serilum.com/donate Appreciate it! <3   
 '''
 
 [[dependencies.quickrightclick]]
     modId="collective"
     type="required"
     mandatory=true
-    versionRange="[8.25,)"
+    versionRange="[8.40,)"
     ordering="NONE"
     side="BOTH"
 
