@@ -11,5 +11,4 @@ public class Constants {
 	public static final Component SHULKER_BOX_TITLE = Component.translatable("container.shulkerBox");
 	public static final Component SMITHING_TABLE_TITLE = Component.translatable("block.minecraft.smithing_table");
 	public static final Component STONECUTTER_TITLE = Component.translatable("container.stonecutter");
-	public static final String INVISIBLE_CHAR = "⠀ ";
 }
