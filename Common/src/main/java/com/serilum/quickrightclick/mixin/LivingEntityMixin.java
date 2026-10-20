@@ -14,7 +14,7 @@ public class LivingEntityMixin {
 	@Inject(method = "stopSleeping()V", at = @At(value = "HEAD"))
 	public void stopSleeping(CallbackInfo ci) {
 		LivingEntity livingEntity = (LivingEntity)(Object)this;
-		if (livingEntity instanceof Player) {
+		if (livingEntity instanceof Player && !livingEntity.level().isClientSide()) {
 			Player player = (Player)livingEntity;
 			String playerName = player.getName().getString();
 			if (!Variables.bedIsSleeping.contains(playerName)) {
