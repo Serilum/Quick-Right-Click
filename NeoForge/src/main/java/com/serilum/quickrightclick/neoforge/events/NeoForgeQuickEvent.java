@@ -1,12 +1,17 @@
 package com.serilum.quickrightclick.neoforge.events;
 
 import com.serilum.quickrightclick.events.QuickEvent;
+import net.minecraft.world.InteractionResult;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
 public class NeoForgeQuickEvent {
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onItemClick(PlayerInteractEvent.RightClickItem e) {
-		QuickEvent.onItemClick(e.getEntity(), e.getLevel(), e.getHand());
+		if (QuickEvent.onItemClick(e.getEntity(), e.getLevel(), e.getHand()).getResult().equals(InteractionResult.SUCCESS)) {
+			e.setCancellationResult(InteractionResult.SUCCESS);
+			e.setCanceled(true);
+		}
 	}
 }

@@ -6,13 +6,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class Util {
@@ -25,32 +23,17 @@ public class Util {
 		}
 
 		Level level = player.level();
-
-		boolean bedGiven = false;
 		BlockPos playerPos = player.blockPosition();
-		for (BlockPos aroundPos : BlockPos.betweenClosed(playerPos.getX()-1 , playerPos.getY()-1, playerPos.getZ()-1, playerPos.getX()+1, playerPos.getY()+1, playerPos.getZ()+1)) {
-			BlockState aroundState = level.getBlockState(aroundPos);
-			Block aroundBlock = aroundState.getBlock();
-			if (aroundBlock instanceof BedBlock) {
-				if (!bedGiven && !player.isCreative()) {
-					Item bedItem = aroundBlock.asItem();
-					ItemStack bedItemStack = new ItemStack(bedItem, 1);
 
-					InteractionHand hand = InteractionHand.MAIN_HAND;
-					if (Variables.bedUsedHand.containsKey(playerName)) {
-						hand = Variables.bedUsedHand.get(playerName);
-					}
-
-					if (player.getItemInHand(hand).isEmpty()) {
-						player.setItemInHand(hand, bedItemStack);
-					} else {
-						ItemFunctions.giveOrDropItemStack(player, bedItemStack);
-					}
-
-					bedGiven = true;
+		BlockPos footPos = Variables.bedFootPos.remove(playerName);
+		if (footPos != null) {
+			Block bedBlock = getQuickBedBlock(level, footPos);
+			if (bedBlock != null) {
+				if (!player.isCreative()) {
+					returnBedItem(player, playerName, new ItemStack(bedBlock.asItem(), 1));
 				}
 
-				level.setBlock(aroundPos, Blocks.AIR.defaultBlockState(), 3);
+				removeQuickBed(level, footPos);
 			}
 		}
 
@@ -58,5 +41,42 @@ public class Util {
 		player.teleportTo(southPos.getX()+0.5, southPos.getY()+0.5, southPos.getZ()+0.5);
 
 		Variables.bedIsSleeping.remove(playerName);
+	}
+
+	public static void removeQuickBed(Level level, BlockPos footPos) {
+		BlockPos headPos = footPos.north();
+		if (level.getBlockState(headPos).getBlock() instanceof BedBlock) {
+			level.setBlock(headPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
+		}
+		if (level.getBlockState(footPos).getBlock() instanceof BedBlock) {
+			level.setBlock(footPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+		}
+	}
+
+	private static Block getQuickBedBlock(Level level, BlockPos footPos) {
+		Block headBlock = level.getBlockState(footPos.north()).getBlock();
+		if (headBlock instanceof BedBlock) {
+			return headBlock;
+		}
+
+		Block footBlock = level.getBlockState(footPos).getBlock();
+		if (footBlock instanceof BedBlock) {
+			return footBlock;
+		}
+		return null;
+	}
+
+	private static void returnBedItem(Player player, String playerName, ItemStack bedItemStack) {
+		InteractionHand hand = InteractionHand.MAIN_HAND;
+		if (Variables.bedUsedHand.containsKey(playerName)) {
+			hand = Variables.bedUsedHand.get(playerName);
+		}
+
+		if (player.getItemInHand(hand).isEmpty()) {
+			player.setItemInHand(hand, bedItemStack);
+		}
+		else {
+			ItemFunctions.giveOrDropItemStack(player, bedItemStack);
+		}
 	}
 }

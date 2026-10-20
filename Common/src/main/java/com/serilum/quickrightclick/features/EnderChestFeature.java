@@ -18,7 +18,12 @@ public class EnderChestFeature {
 			return false;
 		}
 
-		player.openMenu(new SimpleMenuProvider((id, inventory, p) -> ChestMenu.threeRows(id, inventory, enderChestContainer), Constants.ENDER_CHEST_TITLE));
+		if (enderChestContainer.getContainerSize() >= 54) {
+			player.openMenu(new SimpleMenuProvider((id, inventory, p) -> ChestMenu.sixRows(id, inventory, enderChestContainer), Constants.ENDER_CHEST_TITLE));
+		}
+		else {
+			player.openMenu(new SimpleMenuProvider((id, inventory, p) -> ChestMenu.threeRows(id, inventory, enderChestContainer), Constants.ENDER_CHEST_TITLE));
+		}
 		return true;
 	}
 }

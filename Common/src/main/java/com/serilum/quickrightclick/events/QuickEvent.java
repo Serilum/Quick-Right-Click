@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 
@@ -32,11 +33,11 @@ public class QuickEvent {
 		else if (block instanceof CartographyTableBlock) {
 			result = CartographyTableFeature.init(level, player, playerPos);
 		}
-		else if (block instanceof CraftingTableBlock) {
+		else if (block instanceof CraftingTableBlock || item.equals(Items.CRAFTING_TABLE)) {
 			if (block instanceof SmithingTableBlock) {
 				result = SmithingTableFeature.init(level, player, playerPos);
 			}
-			else {
+			else if (!(block instanceof FletchingTableBlock)) {
 				result = CraftingTableFeature.init(level, player, playerPos);
 			}
 		}
@@ -47,7 +48,7 @@ public class QuickEvent {
 			result = GrindstoneFeature.init(level, player, playerPos);
 		}
 		else if (block instanceof ShulkerBoxBlock) {
-			result = ShulkerBoxFeature.init(level, player, playerPos, handStack, hand, block);
+			result = ShulkerBoxFeature.init(level, player, handStack, hand, block);
 		}
 		else if (block instanceof StonecutterBlock) {
 			result = StonecutterFeature.init(level, player, playerPos);
